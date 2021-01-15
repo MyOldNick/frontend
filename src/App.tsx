@@ -1,23 +1,25 @@
 //React
-import React, {useEffect} from 'react';
-//Store
-import {observer} from "mobx-react-lite";
-import Users from './Store/Users'
+import React from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+} from "react-router-dom";
+//Components
+import Login from './Pages/Login/Login'
+import Register from './Pages/Register/Register'
+import Home from './Pages/Home/Home'
 
 
-const App: React.FC = observer((): JSX.Element => {
-
-
-    useEffect(() => {
-        Users.getUsers()
-    }, [])
+const App: React.FC = (): JSX.Element => {
 
 
     return (
-        <div className="App">
-            {Users.users.map((el: any) => (<div key={el.id}>{el.name}</div>))}
-        </div>
+        <Router>
+            <Route exact path="/" component={Home}/>
+            <Route path="/register" component={Register}/>
+            <Route path="/login" component={Login}/>
+        </Router>
     );
-})
+}
 
 export default App;
