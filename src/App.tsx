@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+//React
+import React, {useEffect} from 'react';
+//Store
+import {observer} from "mobx-react-lite";
+import Users from './Store/Users'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App: React.FC = observer((): JSX.Element => {
+
+
+    useEffect(() => {
+        Users.getUsers()
+    }, [])
+
+
+    return (
+        <div className="App">
+            {Users.users.map((el: any) => (<div key={el.id}>{el.name}</div>))}
+        </div>
+    );
+})
 
 export default App;
