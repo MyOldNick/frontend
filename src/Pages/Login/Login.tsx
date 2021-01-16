@@ -1,5 +1,5 @@
 //React
-import React from 'react'
+import React, {BaseSyntheticEvent, useState} from 'react'
 //Store
 import {observer} from "mobx-react-lite";
 import Language from "../../Store/Language";
@@ -28,15 +28,28 @@ import {
 } from '../../Constants/Russian/RegistartionAndLoginRus'
 
 const Login: React.FC<any> = observer(({history}): JSX.Element => {
+    const [formData, setFormData] = useState<any>({})
 
     const styles = useStyles()
 
 
     const goToRegister = () => history.push('/register')
 
+    const onChange = (event: BaseSyntheticEvent) => {
+
+        console.log(event.target.name)
+
+        const {name, value}: any = event.target
+
+        const obj = Object.assign(formData, {[name]: value})
+
+        setFormData(obj)
+    }
+
     const auth = () => {
-        UserStore.getUserData()
-        history.push('/')
+
+        UserStore.authUser(formData).then(res => res.status === 200 && history.push('/'))
+
     }
 
     return (
@@ -44,6 +57,8 @@ const Login: React.FC<any> = observer(({history}): JSX.Element => {
             <LanguageButton/>
             <h1 className={styles.title}>{Language.english ? SIGN_IN_ENG : SIGN_IN_RUS}</h1>
             <TextField
+                name='username'
+                onChange={onChange}
                 label={Language.english ? EMAIL_ENG : EMAIL_RUS}
                 placeholder={Language.english ? EMAIL_ENG : EMAIL_RUS}
                 variant="outlined"
@@ -56,6 +71,8 @@ const Login: React.FC<any> = observer(({history}): JSX.Element => {
                 }}
             />
             <TextField
+                name='password'
+                onChange={onChange}
                 label={Language.english ? PASSWORD_ENG : PASSWORD_RUS}
                 placeholder={Language.english ? PASSWORD_ENG : PASSWORD_RUS}
                 type="password"
@@ -73,7 +90,8 @@ const Login: React.FC<any> = observer(({history}): JSX.Element => {
                 {Language.english ? SIGN_IN_ENG : SIGN_IN_RUS}
             </Button>
 
-            <Button onClick={goToRegister} className={styles.link}>{Language.english ? REGISTRATION_ENG : REGISTRATION_RUS}</Button>
+            <Button onClick={goToRegister}
+                    className={styles.link}>{Language.english ? REGISTRATION_ENG : REGISTRATION_RUS}</Button>
         </Container>
     )
 })

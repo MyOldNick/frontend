@@ -1,18 +1,16 @@
+//React
 import React from 'react'
-import {
-    Link
-} from "react-router-dom";
+//Store
+import {observer} from "mobx-react-lite";
+import UserStore from '../../Store/User'
 
-const Home: React.FC = (): JSX.Element => {
+const Home: React.FC = observer((): JSX.Element => {
+
     return (
         <div>
-            <Link to={'/login'}>Страница входа</Link>
-            <br/>
-            <Link to={'/register'}>Регистрация</Link>
-            <br/>
-            <Link to={'/profile'}>Профиль</Link>
+            <h1>Welcome {UserStore.user.username.toUpperCase()} :3 </h1>
         </div>
     )
-}
+})
 
 export default Home

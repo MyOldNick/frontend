@@ -3,19 +3,30 @@ import {makeAutoObservable} from "mobx";
 
 
 class UserStore {
-    user: any = {
-        name: undefined
-    }
+    user: any =  {}
+
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    getUserData() {
-        this.user.name = 'Mark'
+    async authUser(data: any) {
 
-        console.log(this.user)
+        const body = JSON.stringify(data)
+
+        const res = await fetch(`http://40.127.228.80:1337/users/auth/`, {
+            method: "POST",
+            body: body
+        })
+
+        const json =  await res.json()
+
+        this.user = json.data.user
+
+
+        return res
     }
+
 }
 
 export default new UserStore()

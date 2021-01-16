@@ -14,6 +14,7 @@
 <ol>
 <li>Git clone - копируем репозиторий</li>
 <li>npm install - устанавливаем зависимости</li>
+<li>npm i serve - устаналиваем сервер</li>
 <li>npm run build - создаем продакшен сборку</li>
 <li>serve -s build - запускаем PWA</li>
 </ol>

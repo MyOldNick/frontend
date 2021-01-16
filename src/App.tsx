@@ -19,9 +19,9 @@ const App: React.FC = observer((): JSX.Element => {
 
     return (
             <Router>
-                <Route exact path="/" render={() => (!UserStore.user.name ? <Redirect to='/login'/>: <Main/>)}/>
-                <Route path="/register" render={props => (UserStore.user.name ? <Redirect to='/'/> : <Register {...props}/>)}/>
-                <Route path="/login" render={props => (UserStore.user.name ? <Redirect to='/'/> : <Login {...props}/>)}/>
+                <Route exact path="/" render={() => (!UserStore.user?.username ? <Redirect to='/login'/>: <Main/>)}/>
+                <Route path="/register" render={props => (UserStore.user?.username ? <Redirect to='/'/> : <Register {...props}/>)}/>
+                <Route path="/login" render={props => (UserStore.user?.username ? <Redirect to='/'/> : <Login {...props}/>)}/>
             </Router>
     );
 })

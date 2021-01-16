@@ -10,7 +10,7 @@ const User: React.FC = (): JSX.Element => {
 
     return (
             <Container>
-                Hello
+                Hello. This is your profile
             </Container>
     )
 }

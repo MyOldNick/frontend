@@ -1,5 +1,5 @@
 //React
-import React from 'react'
+import React, {BaseSyntheticEvent, useState} from 'react'
 //store
 import {observer} from "mobx-react-lite";
 import Language from "../../Store/Language";
@@ -32,16 +32,45 @@ import {
 import LanguageButton from "../../Components/Buttons/LanguageButton";
 
 const Register: React.FC<any> = observer(({history}): JSX.Element => {
+    const [formsData, setFormsData] = useState<any>({})
 
     const styles = useStyles()
 
+    const onChange = (event: BaseSyntheticEvent) => {
+        const {name, value} = event.target
+
+        const obj = Object.assign(formsData, {[name]: value})
+
+        setFormsData(obj)
+    }
+
     const goToLogin = () => history.push('/login')
+
+    const createUser = () => {
+
+        const body: any = JSON.stringify(formsData)
+
+        fetch(`http://40.127.228.80:1337/users/`, {
+            method: "POST",
+            body: body,
+        }).then(res => {
+            if(res.status === 200) {
+                alert('User created')
+                history.push('/login')
+            } else {
+                alert('ERROR')
+            }
+        })
+    }
+
 
     return (
         <Container className={styles.container}>
             <LanguageButton/>
             <h1 className={styles.title} >{Language.english ? REGISTRATION_ENG : REGISTRATION_RUS}</h1>
             <TextField
+                name="username"
+                onChange={onChange}
                 label={Language.english ? LOGIN_ENG : LOGIN_RUS}
                 placeholder={Language.english ? LOGIN_ENG : LOGIN_RUS}
                 variant="outlined"
@@ -66,6 +95,8 @@ const Register: React.FC<any> = observer(({history}): JSX.Element => {
                 }}
             />
             <TextField
+                name="password"
+                onChange={onChange}
                 label={Language.english ? PASSWORD_ENG : PASSWORD_RUS}
                 placeholder={Language.english ? ENTER_PASSWORD_ENG : ENTER_PASSWORD_RUS}
                 type="password"
@@ -92,7 +123,7 @@ const Register: React.FC<any> = observer(({history}): JSX.Element => {
                 }}
             />
 
-            <Button variant="contained" color="primary" className={styles.button}>
+            <Button onClick={createUser} variant="contained" color="primary" className={styles.button}>
                 {Language.english ? REGISTRATION_ENG : REGISTRATION_RUS}
             </Button>
 
