@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     },
     button: {
         height: '30px',
-        marginTop: '20px'
+        marginTop: '20px',
     }
 });
 

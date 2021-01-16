@@ -30,12 +30,10 @@ const useStyles = makeStyles({
         fontFamily: ['Alegreya', 'serif'].join(','),
     },
     link: {
-        fontSize: '18px',
-        textAlign: 'center',
-        textDecoration: 'none',
-        "&:visited": {
-            color: '#115293'
-        }
+        width: '60%',
+        margin: '0 auto',
+        color: '#115293',
+        fontFamily: ['Alegreya', 'serif'].join(','),
     }
 });
 

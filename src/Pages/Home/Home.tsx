@@ -9,6 +9,8 @@ const Home: React.FC = (): JSX.Element => {
             <Link to={'/login'}>Страница входа</Link>
             <br/>
             <Link to={'/register'}>Регистрация</Link>
+            <br/>
+            <Link to={'/profile'}>Профиль</Link>
         </div>
     )
 }

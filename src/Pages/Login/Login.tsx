@@ -1,11 +1,9 @@
 //React
 import React from 'react'
-import {
-    Link
-} from "react-router-dom";
 //Store
 import {observer} from "mobx-react-lite";
 import Language from "../../Store/Language";
+import UserStore from '../../Store/User'
 //Components
 import LanguageButton from "../../Components/Buttons/LanguageButton";
 //MaterialUI
@@ -29,10 +27,17 @@ import {
     EMAIL_RUS
 } from '../../Constants/Russian/RegistartionAndLoginRus'
 
-const Login: React.FC = observer((): JSX.Element => {
+const Login: React.FC<any> = observer(({history}): JSX.Element => {
 
     const styles = useStyles()
 
+
+    const goToRegister = () => history.push('/register')
+
+    const auth = () => {
+        UserStore.getUserData()
+        history.push('/')
+    }
 
     return (
         <Container className={styles.container}>
@@ -64,11 +69,11 @@ const Login: React.FC = observer((): JSX.Element => {
                 }}
             />
 
-            <Button variant="contained" color="primary" className={styles.button}>
+            <Button onClick={auth} variant="contained" color="primary" className={styles.button}>
                 {Language.english ? SIGN_IN_ENG : SIGN_IN_RUS}
             </Button>
 
-            <Link to={'/register'} className={styles.link}>{Language.english ? REGISTRATION_ENG : REGISTRATION_RUS}</Link>
+            <Button onClick={goToRegister} className={styles.link}>{Language.english ? REGISTRATION_ENG : REGISTRATION_RUS}</Button>
         </Container>
     )
 })

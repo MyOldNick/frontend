@@ -3,23 +3,27 @@ import React from 'react';
 import {
     BrowserRouter as Router,
     Route,
+    Redirect
 } from "react-router-dom";
-//Components
+//Store
+import {observer} from "mobx-react-lite";
+import UserStore from './Store/User'
+//Pages
 import Login from './Pages/Login/Login'
 import Register from './Pages/Register/Register'
-import Home from './Pages/Home/Home'
+//Components
+import Main from './Components/Main/Main'
 
 
-const App: React.FC = (): JSX.Element => {
-
+const App: React.FC = observer((): JSX.Element => {
 
     return (
-        <Router>
-            <Route exact path="/" component={Home}/>
-            <Route path="/register" component={Register}/>
-            <Route path="/login" component={Login}/>
-        </Router>
+            <Router>
+                <Route exact path="/" render={() => (!UserStore.user.name ? <Redirect to='/login'/>: <Main/>)}/>
+                <Route path="/register" render={props => (UserStore.user.name ? <Redirect to='/'/> : <Register {...props}/>)}/>
+                <Route path="/login" render={props => (UserStore.user.name ? <Redirect to='/'/> : <Login {...props}/>)}/>
+            </Router>
     );
-}
+})
 
 export default App;

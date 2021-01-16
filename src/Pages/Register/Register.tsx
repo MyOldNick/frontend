@@ -1,6 +1,5 @@
 //React
 import React from 'react'
-import {Link} from "react-router-dom";
 //store
 import {observer} from "mobx-react-lite";
 import Language from "../../Store/Language";
@@ -32,9 +31,11 @@ import {
 } from '../../Constants/Russian/RegistartionAndLoginRus'
 import LanguageButton from "../../Components/Buttons/LanguageButton";
 
-const Register: React.FC = observer((): JSX.Element => {
+const Register: React.FC<any> = observer(({history}): JSX.Element => {
 
     const styles = useStyles()
+
+    const goToLogin = () => history.push('/login')
 
     return (
         <Container className={styles.container}>
@@ -95,7 +96,7 @@ const Register: React.FC = observer((): JSX.Element => {
                 {Language.english ? REGISTRATION_ENG : REGISTRATION_RUS}
             </Button>
 
-            <Link to={'/login'} className={styles.link}>{Language.english ? SIGN_IN_ENG : SIGN_IN_RUS }</Link>
+            <Button onClick={goToLogin} className={styles.link}>{Language.english ? SIGN_IN_ENG : SIGN_IN_RUS}</Button>
         </Container>
     )
 })
