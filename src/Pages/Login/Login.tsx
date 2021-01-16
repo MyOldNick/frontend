@@ -48,7 +48,15 @@ const Login: React.FC<any> = observer(({history}): JSX.Element => {
 
     const auth = () => {
 
-        UserStore.authUser(formData).then(res => res.status === 200 && history.push('/'))
+        UserStore.authUser(formData).then(res => {
+            if (res.status === 200) {
+                history.push('/')
+            }
+        })
+
+        // UserStore.fakeUser()
+        //
+        // history.push('/')
 
     }
 

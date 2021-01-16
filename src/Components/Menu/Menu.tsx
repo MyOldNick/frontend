@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import Language from "../../Store/Language";
 //MaterialUI
-import {makeStyles} from '@material-ui/core/styles';
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import DehazeOutlinedIcon from '@material-ui/icons/DehazeOutlined';

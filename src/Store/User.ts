@@ -3,11 +3,17 @@ import {makeAutoObservable} from "mobx";
 
 
 class UserStore {
-    user: any =  {}
+    user: any =  {
+    }
+    posts: Array<any> = []
 
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    fakeUser() {
+        this.user.username = 'Fake User'
     }
 
     async authUser(data: any) {
@@ -25,6 +31,11 @@ class UserStore {
 
 
         return res
+    }
+
+    createPost(data: any) {
+
+        this.posts.push(data)
     }
 
 }

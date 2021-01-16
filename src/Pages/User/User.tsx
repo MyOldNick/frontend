@@ -1,18 +1,99 @@
-//Components
-import React from 'react'
+//React
+import React, {BaseSyntheticEvent, useEffect, useState} from 'react'
+//Store
+import {observer} from 'mobx-react-lite'
+import UserStore from '../../Store/User'
 //MaterialUI
 import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+//styles
+import useStyles from "../../Styles/UserPage";
+//images
+import Image from '../../Images/img.png'
+
+const User: React.FC = observer((): JSX.Element => {
+    const [formData, setFormData] = useState<string>('')
+    const [posts, setPosts] = useState<Array<string>>([])
+    const styles = useStyles()
+
+    useEffect(() => {
 
 
-const User: React.FC = (): JSX.Element => {
+        update()
 
+    }, [posts])
 
+    const onChange = (event: BaseSyntheticEvent) => {
+        const {value} = event.target
+
+        setFormData(value)
+    }
+
+    const createPost = () => {
+        if(formData.length > 0) {
+            UserStore.createPost(formData)
+            setFormData('')
+            update()
+        }
+    }
+
+    const update = () => {
+        const array: Array<string> = UserStore.posts.reverse()
+        setPosts(array)
+
+        console.log('heh')
+    }
 
     return (
-            <Container>
-                Hello. This is your profile
-            </Container>
+        <Container className={styles.container}>
+            <div className={styles.header}>
+                PROJECT NAME
+            </div>
+            <div className={styles.mainInfo}>
+                <Avatar src={Image} className={styles.avatarBig}/>
+                <p>
+                    <strong>{UserStore.user.username}</strong>
+                    <br/>Hello. This is your profile
+                </p>
+            </div>
+            <TextField
+                onChange={onChange}
+                value={formData}
+                name='username'
+                label="Ваш пост"
+                multiline
+                placeholder="Начать писать"
+                variant="outlined"
+                className={styles.form}
+                InputProps={{
+                    classes: {input: styles.input}
+                }}
+                InputLabelProps={{
+                    className: styles.label
+                }}
+            />
+            <Button onClick={createPost} variant="contained" color="primary" className={styles.button}>
+                Отправить
+            </Button>
+
+            {posts?.map((el: any, index: number) => (
+                <div key={index} className={styles.card}>
+                    <div style={{display: 'flex'}}>
+                        <Avatar src={Image} className={styles.avatarSmall}/>
+                        <Typography className={styles.cardTitle}> {UserStore.user.username}</Typography>
+                    </div>
+                    <CardContent>
+                        <Typography style={{whiteSpace: 'pre-wrap'}}> {el}</Typography>
+                    </CardContent>
+                </div>
+            ))}
+        </Container>
     )
-}
+})
 
 export default User
