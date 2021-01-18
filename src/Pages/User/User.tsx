@@ -21,7 +21,7 @@ const User: React.FC = observer((): JSX.Element => {
 
     useEffect(() => {
 
-        UserStore.getUserPosts()
+        // UserStore.getUserPosts()
 
     }, [])
 

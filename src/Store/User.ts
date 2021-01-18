@@ -1,5 +1,5 @@
 //MobX
-import {makeAutoObservable, runInAction} from "mobx";
+import {makeAutoObservable} from "mobx";
 
 
 class UserStore {
@@ -36,7 +36,6 @@ class UserStore {
 
     async createPost(data: any) {
 
-
         const token = await localStorage.getItem("token")
 
         const body = JSON.stringify({token: token, data: {title: data}})
@@ -53,18 +52,6 @@ class UserStore {
 
     }
 
-    getUserPosts() {
-        const token = localStorage.getItem("token")
-
-        const body = JSON.stringify({token: token, page: 1})
-
-        fetch(`http://40.127.228.80:1337/events/1/`, {
-            method: "POST",
-            body: body
-        })
-            .then(res => res.json())
-            .then(res => runInAction(() => this.userPosts = res.data.reverse()))
-    }
 
 }
 

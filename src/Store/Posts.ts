@@ -8,7 +8,7 @@ class PostsStore {
         makeAutoObservable(this)
     }
 
-    async getPosts() {
+    getAllPosts() {
         const token = localStorage.getItem("token")
 
         const body = JSON.stringify({token: token, page: 1})
@@ -18,7 +18,7 @@ class PostsStore {
             body: body
         })
             .then(res => res.json())
-            .then(res => runInAction(() => this.allPosts = res.data))
+            .then(res => runInAction(() => this.allPosts = res.data.reverse()))
     }
 }
 
