@@ -54,9 +54,6 @@ const Login: React.FC<any> = observer(({history}): JSX.Element => {
             }
         })
 
-        // UserStore.fakeUser()
-        //
-        // history.push('/')
 
     }
 
