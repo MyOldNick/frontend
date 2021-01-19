@@ -52,9 +52,6 @@ const User: React.FC = observer((): JSX.Element => {
         <Container className={styles.container}>
             <TextDrawer openDrawer={openDrawer} closeDrawer={closeDrawer}
                         onChange={onChange} formData={formData} styles={styles}/>
-            <div className={styles.header}>
-                NEW GENERATION
-            </div>
             <div className={styles.mainInfo}>
                 <Avatar src={Image} className={styles.avatarBig}/>
                 <p>

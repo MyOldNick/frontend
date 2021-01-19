@@ -2,42 +2,32 @@
 import React, {useEffect} from 'react'
 //Store
 import {observer} from "mobx-react-lite";
-import UserStore from '../../Store/User'
 import HomeStore from '../../Store/Home'
 //MaterialUI
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import CardContent from "@material-ui/core/CardContent";
-//images
-import Image from '../../Images/img.png'
+import Container from "@material-ui/core/Container";
 //styles
-import useStyles from "../../Styles/MenuStyles";
+import useStyles from "../../Styles/HomeStyles";
+//components
+import PostCard from '../../Components/PostCard/PostCard'
 
 const Home: React.FC = observer((): JSX.Element => {
+    const styles = useStyles()
+
 
     useEffect(() => {
 
-        HomeStore.getAllPosts()
+        HomeStore.getAllPosts(1)
 
-    },[])
+    }, [])
 
-    const styles = useStyles()
 
     return (
-        <div>
-            <h1 style={{textAlign: 'center'}}>Welcome {UserStore.user.username.toUpperCase()} :3 </h1>
-            {HomeStore.allPosts.map((el, index) => (
-                <div key={index} className={styles.card}>
-                    <div style={{display: 'flex'}}>
-                        <Avatar src={Image} className={styles.avatarSmall}/>
-                        <Typography className={styles.cardTitle}> {el.author?.$oid || 'Анонимный ононим'}</Typography>
-                    </div>
-                    <CardContent>
-                        <Typography style={{whiteSpace: 'pre-wrap'}}> {el.title}</Typography>
-                    </CardContent>
-                </div>
-            ))}
-        </div>
+        <Container className={styles.container}>
+            {/*add destructuring after types*/}
+                {HomeStore.allPosts.map((el, index) => (
+                    <PostCard key={index} author={el.author} title={el.title} index={index}/>
+                ))}
+        </Container>
     )
 })
 

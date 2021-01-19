@@ -19,14 +19,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         marginTop: '20px'
     },
-    header: {
-        boxSizing: 'border-box',
-        width: '100%',
-        height: '50px',
-        paddingTop: '15px',
-        textAlign: 'center',
-        color: '#115293',
-    },
     form: {
         width: '90%',
         marginTop: '20px',

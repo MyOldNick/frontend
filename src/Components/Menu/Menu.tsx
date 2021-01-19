@@ -14,7 +14,7 @@ import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import {PROFILE_ENG, MAIN_ENG, MENU_ENG} from '../../Constants/English/MenuEng'
 import {PROFILE_RUS, MAIN_RUS, MENU_RUS} from '../../Constants/Russian/MenuRus'
 //styles
-import useStyles from '../../Styles/MenuStyles'
+import useStyles from '../../Styles/HomeStyles'
 
 
 const Menu: React.FC = observer((): JSX.Element => {

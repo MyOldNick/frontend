@@ -1,14 +1,10 @@
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        position: 'fixed',
-        left: '0',
-        bottom: '0',
-    },
     card: {
-        marginTop: '10px'
+        width:'90%',
+        margin: '20px auto'
     },
     cardTitle: {
         fontSize: '20px',
@@ -22,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
         height: theme.spacing(7),
         marginTop: '10px',
         marginLeft: '10px'
+    },
+    commentButton: {
+        marginLeft: '10px',
+        color: '#115293',
     },
 }));
 

@@ -11,21 +11,17 @@ class HomeStore {
         makeAutoObservable(this)
     }
 
-    getAllPosts() {
+    getAllPosts(page: number) {
         const token = localStorage.getItem("token")
 
-        const body = JSON.stringify({token: token, page: 1})
+        const body = JSON.stringify({token: token, page: page})
 
-        fetch(`${API}events/1/`, {
+        fetch(`${API}events/${page}/`, {
             method: "POST",
             body: body
         })
             .then(res => res.json())
-            .then(res => runInAction(() => {
-                if(res.data.length > 0) {
-                    this.allPosts = res.data.reverse()
-                }
-            }))
+            .then(res => runInAction(() => this.allPosts = res.data.posts.reverse()))
     }
 }
 

@@ -1,5 +1,6 @@
 //React
 import React, {BaseSyntheticEvent, useState} from 'react'
+import {useHistory} from "react-router";
 //Store
 import {observer} from "mobx-react-lite";
 import Language from "../../Store/Language";
@@ -27,9 +28,10 @@ import {
     EMAIL_RUS
 } from '../../Constants/Russian/RegistartionAndLoginRus'
 
-const Login: React.FC<any> = observer(({history}): JSX.Element => {
+const Login: React.FC<any> = observer((): JSX.Element => {
     const [formData, setFormData] = useState<any>({})
 
+    const history = useHistory()
     const styles = useStyles()
 
 

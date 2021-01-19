@@ -1,5 +1,6 @@
 //React
 import React, {BaseSyntheticEvent, useState} from 'react'
+import {useHistory} from "react-router";
 //store
 import {observer} from "mobx-react-lite";
 import Language from "../../Store/Language";
@@ -33,9 +34,9 @@ import {API} from '../../Constants/API'
 //components
 import LanguageButton from "../../Components/Buttons/LanguageButton";
 
-const Register: React.FC<any> = observer(({history}): JSX.Element => {
+const Register: React.FC<any> = observer((): JSX.Element => {
     const [formsData, setFormsData] = useState<any>({})
-
+    const history = useHistory()
     const styles = useStyles()
 
     const onChange = (event: BaseSyntheticEvent) => {
