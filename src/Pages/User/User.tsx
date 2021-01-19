@@ -7,16 +7,18 @@ import UserStore from '../../Store/User'
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import TextField from "@material-ui/core/TextField";
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 //styles
 import useStyles from "../../Styles/UserPage";
 //images
 import Image from '../../Images/img.png'
+//Components
+import TextDrawer from '../../Components/TextDrawer/TextDrawer'
 
 const User: React.FC = observer((): JSX.Element => {
     const [formData, setFormData] = useState<string>('')
+    const [openDrawer, setOpenDrawer] = useState<boolean>(false)
     const styles = useStyles()
 
     useEffect(() => {
@@ -32,17 +34,26 @@ const User: React.FC = observer((): JSX.Element => {
     }
 
     const createPost = () => {
-        if(formData.length > 0) {
+        if (formData.length > 0) {
             UserStore.createPost(formData)
             setFormData('')
         }
     }
 
+    const drawerOpen = () => {
+        setOpenDrawer(true)
+    }
+
+    const closeDrawer = () => {
+        setOpenDrawer(false)
+    }
 
     return (
         <Container className={styles.container}>
+            <TextDrawer openDrawer={openDrawer} closeDrawer={closeDrawer}
+                        onChange={onChange} formData={formData} styles={styles}/>
             <div className={styles.header}>
-                PROJECT NAME
+                NEW GENERATION
             </div>
             <div className={styles.mainInfo}>
                 <Avatar src={Image} className={styles.avatarBig}/>
@@ -51,24 +62,8 @@ const User: React.FC = observer((): JSX.Element => {
                     <br/>Hello. This is your profile
                 </p>
             </div>
-            <TextField
-                onChange={onChange}
-                value={formData}
-                name='username'
-                label="Ваш пост"
-                multiline
-                placeholder="Начать писать"
-                variant="outlined"
-                className={styles.form}
-                InputProps={{
-                    classes: {input: styles.input}
-                }}
-                InputLabelProps={{
-                    className: styles.label
-                }}
-            />
-            <Button onClick={createPost} variant="contained" color="primary" className={styles.button}>
-                Отправить
+            <Button onClick={drawerOpen} variant="outlined" color="primary" className={styles.button}>
+                Создать новый пост
             </Button>
 
             {UserStore.userPosts?.map((el: any, index: number) => (

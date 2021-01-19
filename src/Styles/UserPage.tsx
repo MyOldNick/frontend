@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     avatarBig: {
         width: theme.spacing(15),
         height: theme.spacing(15),
+        marginRight: '25px'
     },
     avatarSmall: {
         width: theme.spacing(7),
@@ -16,25 +17,26 @@ const useStyles = makeStyles((theme) => ({
     },
     mainInfo: {
         display: 'flex',
-        justifyContent: 'space-between',
         marginTop: '20px'
     },
     header: {
         boxSizing: 'border-box',
         width: '100%',
-        height: '40px',
+        height: '50px',
         paddingTop: '15px',
         textAlign: 'center',
         color: '#115293',
     },
     form: {
-        width: '100%',
-        marginTop: '50px',
-        marginLeft: '0px',
-        marginRight: '0px',
+        width: '90%',
+        marginTop: '20px',
+        marginBottom: '5px',
+        margin: '0px auto',
+        height: '60%'
     },
     input: {
-        maxHeight: '80px',
+        minHeight: '38vh',
+        maxHeight: '38vh',
         "&::placeholder": {
             fontFamily: ['Alegreya', 'serif'].join(','),
         }
@@ -43,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: ['Alegreya', 'serif'].join(','),
     },
     button: {
-        width: '30%',
-        marginTop: '10px',
+        width: '100%',
+        margin: '20px auto',
         fontFamily: ['Alegreya', 'serif'].join(','),
     },
     card: {
@@ -56,6 +58,16 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '20px',
         color: '#115293',
         fontWeight: 'bold'
+    },
+    drawer: {
+        height: '73vh',
+        overflow: 'hidden'
+    },
+    secondaryButton: {
+        width: '90%',
+        margin: '5px auto',
+        // marginTop: '10px',
+
     }
 }));
 

@@ -1,6 +1,7 @@
 //MobX
 import {makeAutoObservable} from "mobx";
-
+//constants
+import {API} from '../Constants/API'
 
 class UserStore {
     user: any = {}
@@ -19,7 +20,7 @@ class UserStore {
 
         const body = JSON.stringify(data)
 
-        const res = await fetch(`http://40.127.228.80:1337/users/auth/`, {
+        const res = await fetch(`${API}users/auth/`, {
             method: "POST",
             body: body
         })
@@ -41,7 +42,7 @@ class UserStore {
         const body = JSON.stringify({token: token, data: {title: data}})
 
 
-        const res = await fetch(`http://40.127.228.80:1337/events/`, {
+        const res = await fetch(`${API}events/`, {
             method: 'POST',
             body: body
         })

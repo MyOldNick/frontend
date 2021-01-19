@@ -29,6 +29,8 @@ import {
     REGISTRATION_RUS,
     EMAIL_RUS
 } from '../../Constants/Russian/RegistartionAndLoginRus'
+import {API} from '../../Constants/API'
+//components
 import LanguageButton from "../../Components/Buttons/LanguageButton";
 
 const Register: React.FC<any> = observer(({history}): JSX.Element => {
@@ -50,7 +52,7 @@ const Register: React.FC<any> = observer(({history}): JSX.Element => {
 
         const body: any = JSON.stringify(formsData)
 
-        fetch(`http://40.127.228.80:1337/users/`, {
+        fetch(`${API}users/`, {
             method: "POST",
             body: body,
         }).then(res => {

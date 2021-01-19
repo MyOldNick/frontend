@@ -3,7 +3,7 @@ import React, {useEffect} from 'react'
 //Store
 import {observer} from "mobx-react-lite";
 import UserStore from '../../Store/User'
-import PostsStore from '../../Store/Posts'
+import HomeStore from '../../Store/Home'
 //MaterialUI
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
@@ -16,8 +16,9 @@ import useStyles from "../../Styles/MenuStyles";
 const Home: React.FC = observer((): JSX.Element => {
 
     useEffect(() => {
-        PostsStore.getAllPosts()
-        console.log(PostsStore.allPosts)
+
+        HomeStore.getAllPosts()
+
     },[])
 
     const styles = useStyles()
@@ -25,7 +26,7 @@ const Home: React.FC = observer((): JSX.Element => {
     return (
         <div>
             <h1 style={{textAlign: 'center'}}>Welcome {UserStore.user.username.toUpperCase()} :3 </h1>
-            {PostsStore.allPosts.map((el, index) => (
+            {HomeStore.allPosts.map((el, index) => (
                 <div key={index} className={styles.card}>
                     <div style={{display: 'flex'}}>
                         <Avatar src={Image} className={styles.avatarSmall}/>

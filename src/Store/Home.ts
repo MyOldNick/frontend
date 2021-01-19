@@ -1,7 +1,10 @@
+//MobX
 import {makeAutoObservable, runInAction} from "mobx";
+//Constants
+import {API} from '../Constants/API'
 
 
-class PostsStore {
+class HomeStore {
     allPosts: Array<any> = []
 
     constructor() {
@@ -13,13 +16,17 @@ class PostsStore {
 
         const body = JSON.stringify({token: token, page: 1})
 
-        fetch(`http://40.127.228.80:1337/events/1/`, {
+        fetch(`${API}events/1/`, {
             method: "POST",
             body: body
         })
             .then(res => res.json())
-            .then(res => runInAction(() => this.allPosts = res.data.reverse()))
+            .then(res => runInAction(() => {
+                if(res.data.length > 0) {
+                    this.allPosts = res.data.reverse()
+                }
+            }))
     }
 }
 
-export default new PostsStore()
+export default new HomeStore()
