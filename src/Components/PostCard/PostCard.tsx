@@ -12,7 +12,7 @@ import PostCardProps from "../../Types/PostCardProps";
 //styles
 import useStyles from '../../Styles/PostCardStyle'
 
-const PostCard: React.FC<PostCardProps> = ({ author, title, index, isSolo}): JSX.Element => {
+const PostCard: React.FC<PostCardProps> = ({ author, title, index, isSolo, openDrawer}): JSX.Element => {
     const history = useHistory()
     const styles = useStyles()
 
@@ -31,7 +31,7 @@ const PostCard: React.FC<PostCardProps> = ({ author, title, index, isSolo}): JSX
             <CardContent>
                 <Typography style={{whiteSpace: 'pre-wrap'}}> {title}</Typography>
             </CardContent>
-            {isSolo ? <div className={styles.commentButton}>Добавить комментарий</div> : <div onClick={getComments} className={styles.commentButton}>Комментарии</div>}
+            {isSolo ? <div onClick={openDrawer} className={styles.commentButton}>Добавить комментарий</div> : <div onClick={getComments} className={styles.commentButton}>Комментарии</div>}
         </div>
     )
 }

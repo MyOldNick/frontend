@@ -68,7 +68,7 @@ const Register: React.FC<any> = observer((): JSX.Element => {
 
 
     return (
-        <Container className={styles.container}>
+        <Container className={styles.container} maxWidth="sm">
             <LanguageButton/>
             <h1 className={styles.title} >{Language.english ? REGISTRATION_ENG : REGISTRATION_RUS}</h1>
             <TextField

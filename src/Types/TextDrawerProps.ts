@@ -5,7 +5,7 @@ type TextDrawerProps = {
     closeDrawer: () => void,
     onChange: (data: BaseSyntheticEvent) => void,
     formData: string,
-    styles: any,
+    action: () => void,
 }
 
 export default TextDrawerProps

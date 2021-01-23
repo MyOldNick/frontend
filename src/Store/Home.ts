@@ -21,7 +21,32 @@ class HomeStore {
             body: body
         })
             .then(res => res.json())
-            .then(res => runInAction(() => this.allPosts = res.data.posts.reverse()))
+            .then(res => runInAction(() => {
+                this.allPosts = res.data.posts.reverse()
+                console.log(res)
+            }))
+    }
+
+
+    createComment(id: string, text: string) {
+        const token = localStorage.getItem("token")
+
+        const body = JSON.stringify({
+            token: token,
+            data: {
+                text: text
+            }
+        })
+
+        fetch(`${API}/comments/post/${id}/`, {
+            method: "POST",
+            body: body
+        })
+            .then(res => res.json())
+            .then(res => runInAction(() => {
+                console.log(res)
+            }))
+
     }
 }
 

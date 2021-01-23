@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
     commentButton: {
         marginLeft: '10px',
         color: '#115293',
+        userSelect: 'none',
+        cursor: 'pointer'
     },
 }));
 

@@ -60,7 +60,7 @@ const Login: React.FC<any> = observer((): JSX.Element => {
     }
 
     return (
-        <Container className={styles.container}>
+        <Container className={styles.container} maxWidth="sm">
             <LanguageButton/>
             <h1 className={styles.title}>{Language.english ? SIGN_IN_ENG : SIGN_IN_RUS}</h1>
             <TextField

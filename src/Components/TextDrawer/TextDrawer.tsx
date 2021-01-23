@@ -6,8 +6,12 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 //Types
 import TextDrawerProps from "../../Types/TextDrawerProps";
+//styles
+import useStyles from '../../Styles/TextDrawerStyle'
 
-const TextDrawer: React.FC<TextDrawerProps> = ({openDrawer, closeDrawer, onChange, formData, styles}): JSX.Element => {
+const TextDrawer: React.FC<TextDrawerProps> = ({openDrawer, closeDrawer, onChange, formData, action}): JSX.Element => {
+    const styles = useStyles()
+
     return (
         <Drawer anchor={'bottom'} open={openDrawer} onClose={closeDrawer} classes={{paper: styles.drawer}}>
             <TextField
@@ -26,7 +30,7 @@ const TextDrawer: React.FC<TextDrawerProps> = ({openDrawer, closeDrawer, onChang
                     className: styles.label
                 }}
             />
-            <Button onClick={closeDrawer} variant="contained" color="primary" className={styles.secondaryButton}>
+            <Button onClick={action} variant="contained" color="primary" className={styles.secondaryButton}>
                 Опубликовать пост
             </Button>
             <Button onClick={closeDrawer} variant="contained" color="default" className={styles.secondaryButton}>

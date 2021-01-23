@@ -1,9 +1,14 @@
+//React
 import React from 'react'
+//MaterialUI
+import Container from "@material-ui/core/Container";
 
-const MainManu: React.FC = (): JSX.Element => {
-    return(
-        <div>HELLO FROM MAIN MENU</div>
+const MainMenu: React.FC = (): JSX.Element => {
+    return (
+        <Container maxWidth="sm">
+            <div style={{textAlign: 'center'}}>HELLO FROM MAIN MENU</div>
+        </Container>
     )
 }
 
-export default MainManu
+export default MainMenu

@@ -49,9 +49,9 @@ const User: React.FC = observer((): JSX.Element => {
     }
 
     return (
-        <Container className={styles.container}>
+        <Container className={styles.container} maxWidth="sm">
             <TextDrawer openDrawer={openDrawer} closeDrawer={closeDrawer}
-                        onChange={onChange} formData={formData} styles={styles}/>
+                        onChange={onChange} formData={formData} action={createPost}/>
             <div className={styles.mainInfo}>
                 <Avatar src={Image} className={styles.avatarBig}/>
                 <p>

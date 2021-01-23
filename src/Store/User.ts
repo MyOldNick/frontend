@@ -35,7 +35,7 @@ class UserStore {
         return res
     }
 
-    async createPost(data: any) {
+    async createPost(data: string) {
 
         const token = await localStorage.getItem("token")
 
