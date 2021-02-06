@@ -1,59 +1,62 @@
 //MobX
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 //constants
-import {API} from '../Constants/API'
+import { API } from "../Constants/API";
 
 class UserStore {
-    user: any = {}
-    userPosts: Array<any> = []
+  user: any = {};
+  userPosts: Array<any> = [];
 
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-    constructor() {
-        makeAutoObservable(this)
-    }
+  fakeUser() {
+    this.user.username = "Fake User";
+  }
 
-    fakeUser() {
-        this.user.username = 'Fake User'
-    }
+  async authUser(data: any) {
+    const body = JSON.stringify(data);
 
-    async authUser(data: any) {
+    const res = await fetch(`${API}auth/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+    });
 
-        const body = JSON.stringify(data)
+    const json = await res.json();
 
-        const res = await fetch(`${API}users/auth/`, {
-            method: "POST",
-            body: body
-        })
+    localStorage.setItem("token", json.data.token);
 
-        const json = await res.json()
+    this.user = json.data.user;
 
-        localStorage.setItem("token", json.data.token)
+    return res;
+  }
 
-        this.user = json.data.user
+  async createPost(data: string) {
+    const token: any = await localStorage.getItem("token");
 
+    const body = JSON.stringify({ title: data, author: this.user.username });
 
-        return res
-    }
+    console.log(data);
 
-    async createPost(data: string) {
+    const res = await fetch(`${API}posts/`, {
+      method: "POST",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: body,
+    });
 
-        const token = await localStorage.getItem("token")
+    const json = await res.json();
 
-        const body = JSON.stringify({token: token, data: {title: data}})
+    console.log(json);
 
-
-        const res = await fetch(`${API}events/`, {
-            method: 'POST',
-            body: body
-        })
-
-        const json = await res.json()
-
-        this.userPosts.unshift(json.data)
-
-    }
-
-
+    this.userPosts.unshift(json.data);
+  }
 }
 
-export default new UserStore()
+export default new UserStore();

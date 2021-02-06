@@ -63,7 +63,7 @@ const User: React.FC = observer((): JSX.Element => {
                 Создать новый пост
             </Button>
 
-            {UserStore.userPosts?.map((el: any, index: number) => (
+            {/* {UserStore.userPosts?.map((el: any, index: number) => (
                 <div key={index} className={styles.card}>
                     <div style={{display: 'flex'}}>
                         <Avatar src={Image} className={styles.avatarSmall}/>
@@ -73,7 +73,7 @@ const User: React.FC = observer((): JSX.Element => {
                         <Typography style={{whiteSpace: 'pre-wrap'}}> {el.title}</Typography>
                     </CardContent>
                 </div>
-            ))}
+            ))} */}
         </Container>
     )
 })

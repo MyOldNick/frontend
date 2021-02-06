@@ -39,8 +39,6 @@ const Login: React.FC<any> = observer((): JSX.Element => {
 
     const onChange = (event: BaseSyntheticEvent) => {
 
-        console.log(event.target.name)
-
         const {name, value}: any = event.target
 
         const obj = Object.assign(formData, {[name]: value})

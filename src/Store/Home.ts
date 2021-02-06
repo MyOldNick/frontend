@@ -1,53 +1,49 @@
 //MobX
-import {makeAutoObservable, runInAction} from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 //Constants
-import {API} from '../Constants/API'
-
+import { API } from "../Constants/API";
 
 class HomeStore {
-    allPosts: Array<any> = []
+  allPosts: Array<any> = [];
 
-    constructor() {
-        makeAutoObservable(this)
-    }
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-    getAllPosts(page: number) {
-        const token = localStorage.getItem("token")
+  getAllPosts(page: number) {
+    const token: any = localStorage.getItem("token");
 
-        const body = JSON.stringify({token: token, page: page})
+    fetch(`${API}posts/${page}/`, {
+      method: "GET",
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => runInAction(() => (this.allPosts = res.results)));
+  }
 
-        fetch(`${API}events/${page}/`, {
-            method: "POST",
-            body: body
+  createComment(id: string, text: string) {
+    const token = localStorage.getItem("token");
+
+    const body = JSON.stringify({
+      token: token,
+      data: {
+        text: text,
+      },
+    });
+
+    fetch(`${API}/comments/post/${id}/`, {
+      method: "POST",
+      body: body,
+    })
+      .then((res) => res.json())
+      .then((res) =>
+        runInAction(() => {
+          console.log(res);
         })
-            .then(res => res.json())
-            .then(res => runInAction(() => {
-                this.allPosts = res.data.posts.reverse()
-                console.log(res)
-            }))
-    }
-
-
-    createComment(id: string, text: string) {
-        const token = localStorage.getItem("token")
-
-        const body = JSON.stringify({
-            token: token,
-            data: {
-                text: text
-            }
-        })
-
-        fetch(`${API}/comments/post/${id}/`, {
-            method: "POST",
-            body: body
-        })
-            .then(res => res.json())
-            .then(res => runInAction(() => {
-                console.log(res)
-            }))
-
-    }
+      );
+  }
 }
 
-export default new HomeStore()
+export default new HomeStore();

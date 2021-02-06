@@ -1,17 +1,16 @@
 //MobX
-import {makeAutoObservable} from "mobx";
-
+import { makeAutoObservable } from "mobx";
 
 class Language {
-    english: any = false
+  english: any = false;
 
-    constructor() {
-        makeAutoObservable(this)
-    }
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-    changeLanguage() {
-        this.english = !this.english
-    }
+  changeLanguage() {
+    this.english = !this.english;
+  }
 }
 
-export default new Language()
+export default new Language();

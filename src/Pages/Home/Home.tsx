@@ -24,7 +24,7 @@ const Home: React.FC = observer((): JSX.Element => {
     return (
         <Container className={styles.container} maxWidth='sm'>
             {/*add destructuring after types*/}
-                {HomeStore.allPosts.map((el, index) => (
+                {HomeStore.allPosts?.map((el, index) => (
                     <PostCard key={index} author={el.author} title={el.title} index={index}/>
                 ))}
         </Container>

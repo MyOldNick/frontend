@@ -1,9 +1,8 @@
 //React
-import React from 'react'
-
+import React from "react";
 
 const Comments: React.FC = (): JSX.Element => {
-    return (<div>df</div>)
-}
+  return <div>df</div>;
+};
 
-export default Comments
+export default Comments;
